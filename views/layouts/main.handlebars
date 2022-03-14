@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Just Tech Bytes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="hero flex-col justify-flex-start">
+            <div class="flex-row">
+            <nav>
+                <ul class="nav_links">
+                    <li><a href="/">Homepage</a></li>
+                    {{#if loggedIn}}
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><button id="logout" class="btn-no-style">Logout</button></li>
+                    {{else}}
+                    <li><a href="/login">Login</a></li>
+                    {{/if}}
+            </nav>
+            </div>
+            <h1 class="app-title">
+                <a href="/">Tech News</a>
+            </h1>
+        </header>
+        <main>
+            {{{ body }}}
+        </main>
+        <footer>
+            Thanks for visiting!
+        </footer>
+    </div>
+
+    {{#if loggedIn}}
+    <script src="/javascript/logout.js"></script>
+    {{/if}}
+</body>
+
+</html>
