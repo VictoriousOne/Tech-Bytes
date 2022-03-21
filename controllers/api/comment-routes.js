@@ -11,6 +11,36 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/:id', withAuth, (req, res) => {
+  Comment.findOne({
+    where: {
+      id: req.params.id
+    }
+  })
+    .then(dbCommentData => {
+      if (!dbCommentData) {
+        res.status(404).json({ message: 'No comment found with this id' });
+        return;
+      }
+      else if (dbCommentData.user_id !== req.session.user_id) {
+        alert(" You must be the owner of the Comment to make changes!");
+      }
+      else {
+        const comment = dbCommentData.get({ plain: true });
+        
+        res.render('edit-comment', {
+          comment,
+          loggedIn: true
+        });
+      }
+      //res.json(dbCommentData);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
 router.post('/', withAuth, (req, res) => {
   // expects => {comment_text: "This is the comment", user_id: 1, post_id: 2}
   Comment.create({
@@ -24,6 +54,32 @@ router.post('/', withAuth, (req, res) => {
       res.status(400).json(err);
     });
 });
+
+router.put('/:id', (req, res) => {
+  Comment.update(
+    {
+      
+      comment_text: req.body.comment_text
+    },
+    {
+      where: {
+        id: req.params.id
+      }
+    }
+  )
+    .then(dbCommentData => {
+      if (!dbCommentData) {
+        res.status(404).json({ message: 'No comment found with this id' });
+        return;
+      }
+      res.json(dbCommentData);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
 
 router.delete('/:id', withAuth, (req, res) => {
   Comment.destroy({

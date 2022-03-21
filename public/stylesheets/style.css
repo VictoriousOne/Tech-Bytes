@@ -50,7 +50,7 @@ body, html {
   display: flex;
   flex-direction: row;
   list-style: none;
-  color: var(--primary);
+  color: var(--primary); 
 }
 
 .nav_links li {
@@ -60,6 +60,10 @@ padding: 0px 30px;
 
 .nav_links li a:hover {
 color: white;
+}
+
+.nav_links li button:hover {
+  color: white;
 }
 
 
@@ -87,6 +91,16 @@ button {
 
 button:hover {
   background-color: #3486eb;
+}
+
+.block {
+  display: block;
+  width: 100%;
+  border: none;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
 }
 
 .post-list {
@@ -221,7 +235,7 @@ main {
 }
 
 .comment:nth-child(odd) {
-  background-color: #fff5eb;
+  background-color: var(--primary);
 }
 
 .comment .meta {

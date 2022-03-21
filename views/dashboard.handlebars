@@ -12,7 +12,7 @@
           <label for="post-desription">Description</label>
           <input id="post-description" name="post-description" />
         </div>
-        <button type="submit" class="btn">Create</button>
+        <button type="submit" class="block">Create</button>
       </form>
     </div>
   </div>
@@ -20,15 +20,23 @@
 
 {{#if posts.length}}
 <section>
-  <h4>Your Posts</h4>
-  <ol>
-    {{#each posts as |post|}}
-    <li>
-      {{> dashpost-info post}}
-      <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a>
-    </li>
-    {{/each}}
-  </ol>
+  <br>
+  <br>
+  <div class="card">
+    <div class="card-header">
+      <h5>Your Posts</h5>
+    </div>
+    <div class="card-body">
+      <ol>
+        {{#each posts as |post|}}
+        <li>
+          {{> dashpost-info post}}
+          <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a>
+        </li>
+        {{/each}}
+      </ol>
+    </div>
+  </div>
 </section>
 {{/if}}
 
