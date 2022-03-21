@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Post, User, Comment, Vote } = require('../models');
+const withAuth = require('../utils/auth');
+
 
 // get all posts for homepage
 router.get('/', (req, res) => {
@@ -35,6 +37,36 @@ router.get('/', (req, res) => {
         posts,
         loggedIn: req.session.loggedIn
       });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
+router.get('/comment/:id', withAuth, (req, res) => {
+  Comment.findOne({
+    where: {
+      id: req.params.id
+    }
+  })
+    .then(dbCommentData => {
+      if (!dbCommentData) {
+        res.status(404).json({ message: 'No comment found with this id' });
+        return;
+      }
+      else if (dbCommentData.user_id !== req.session.user_id) {
+        alert(" You must be the owner of the Comment to make changes!");
+      }
+      else {
+        const comment = dbCommentData.get({ plain: true });
+        
+        res.render('edit-comment', {
+          comment,
+          loggedIn: true
+        });
+      }
+      //res.json(dbCommentData);
     })
     .catch(err => {
       console.log(err);

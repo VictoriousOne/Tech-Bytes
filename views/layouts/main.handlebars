@@ -17,8 +17,8 @@
             <nav>
                 <ul class="nav_links">
                     <li><a href="/">Homepage</a></li>
-                    {{#if loggedIn}}
                     <li><a href="/dashboard">Dashboard</a></li>
+                    {{#if loggedIn}}
                     <li><button id="logout" class="btn-no-style">Logout</button></li>
                     {{else}}
                     <li><a href="/login">Login</a></li>
