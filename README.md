@@ -19,6 +19,9 @@ blog about their likes/dislikes on specific thechnolgies and comment on other po
 If you want to check the application out on local, please start by cloning the repo and running npm install to get all dependencies. 
 Once that process is completed, simply type npm start in the command line and the server will start on port 3001. 
 Visit localhost:3001 to see the running application.
+
+The application is deployed on Heroku.
+Heroku URL: https://mytechbytes.herokuapp.com/
  
 ## Technologies
 -bcrypt
